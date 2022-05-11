@@ -1,1 +1,5 @@
 # web3Learning
+
+这是一个用于学习web3的小项目
+readme中会进行一些叨逼叨
+如果有感兴趣的小伙伴可以进getStart一起学
