@@ -1,4 +1,4 @@
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.11;
 // 请在下方创建函数createCar, 并且该函数接受两个参数，_name (string 类型)和 _color( uint类型):
 
 contract Test{
