@@ -1,4 +1,6 @@
-# 低级call调用
+# solidity call与delegateCall
+
+### 低级call调用
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -42,5 +44,47 @@ contract CallFunction {
 
     }
 }	//调用不存在的函数会报错，无返回的data
+```
+
+
+
+### delegateCall
+
+说明: 
+
+​	与call不同的是，合约代码使用delegatecall调用其他合约代码，状态变量以及<u>*上下文还是本合约*</u>
+call是直接去*<u>其他合约**环境**</u>*中调用，调用使用的环境以及状态变量都是**其他环境**的，
+钱也会打到call的合约～
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.11;
+
+contract BasicContract {
+
+    uint public number;
+    address public sender;
+    uint public value;
+
+    function setNumber(uint _number) external payable{
+        number = _number;
+        sender = msg.sender;
+        value = msg.value;
+    }
+}
+
+contract BizContract {
+    uint public number;
+    address public sender;
+    uint public value;
+
+    function setNumber(address _delegator,uint _number) external payable{
+        (bool success, ) = _delegator.delegatecall(
+            // abi.encodeWithSignature("setNumber(uint256)", _number);
+            abi.encodeWithSelector(BasicContract.setNumber.selector, _number)
+        );
+        require(success, "delegate successed");
+    }
+}
 ```
 
