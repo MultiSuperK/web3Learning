@@ -1,16 +1,49 @@
 # ERC20标准，及案例
 
+## EIP-20标准代币提案
+
+https://eips.ethereum.org/EIPS/eip-20
 
 
-### 前言: CC0
 
-```basic
-CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE
-LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN
-ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS
-INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES
-REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS
-PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM
-THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
-HEREUNDER.
+EIP-20接口标准
+
+```solidity
+pragma solidity ^0.4.24;
+
+/**
+ * @title ERC20 interface
+ * @dev see https://github.com/ethereum/EIPs/issues/20
+ */
+interface IERC20 {
+  function totalSupply() external view returns (uint256);
+
+  function balanceOf(address who) external view returns (uint256);
+
+  function allowance(address owner, address spender)
+    external view returns (uint256);
+
+  function transfer(address to, uint256 value) external returns (bool);
+
+  function approve(address spender, uint256 value)
+    external returns (bool);
+
+  function transferFrom(address from, address to, uint256 value)
+    external returns (bool);
+
+  event Transfer(
+    address indexed from,
+    address indexed to,
+    uint256 value
+  );
+
+  event Approval(
+    address indexed owner,
+    address indexed spender,
+    uint256 value
+  );
+}
 ```
+
+
+
